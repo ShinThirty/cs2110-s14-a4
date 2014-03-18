@@ -113,7 +113,14 @@ public class Game {
          * *** We will not see them because you don't submit class Game ***/
     }
     
-    
+    /** Fill column c of board b, starting with player p.
+     * Precondition: p is not null and 0 <= c < NUM_COLS */
+    public static void fillColumn(Board b, Board.Player p, int c) {
+        while (b.getPlayer(0, c) == null) {
+            b.makeMove(new Move(p, c));
+            p= p.opponent();
+        }
+    }
     
     /** ************** Do not change anything below here ***************/
 
