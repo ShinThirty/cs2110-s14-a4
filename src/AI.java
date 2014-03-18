@@ -48,11 +48,9 @@ public class AI implements Solver {
         // TODO
     }
 
-    /** Evaluate the desirability of Board b for this player
-     * Precondition: b is a leaf node of the game tree (because that is most
-     * effective when looking several moves into the future). 
-     * The desireability is calculated as follows.
-     * 1. If the board does not have a winner: */
+    /** Evaluates the desirability of a given Board. This should only be
+     * called at leaf nodes in a game tree, as it is most effective when
+     * looking several moves into the future. */
     public int evaluateBoard(Board b) {
         Board.Player winner= b.hasConnectFour();
         if (winner == null) {
