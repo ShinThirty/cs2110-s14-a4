@@ -72,8 +72,6 @@ public class Board {
      *  IllegalArgumentException if move's column is full on this Board. */
     public void makeMove(Move move) {
         // TODO
-    	//Delete the following code once you've decided to start implementing
-    	throw new UnsupportedOperationException("You need to implement makeMove before running the game.");
     }
 
     /** Return an array of all moves that can possibly be made by Player p on this
