@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.*;
 
 /** An instance represents the state of a game of Connect Four. */
 public class State implements Comparable<Object> {
@@ -77,7 +78,17 @@ public class State implements Comparable<Object> {
      *  initialize all descendants. 
      */
     public void initializeChildren() { 
-        // TODO
+        // Retrieves the possible moves
+    	Move[] possibleMoves= board.getPossibleMoves(player);
+    	if (possibleMoves == Move.length0) return;
+    	
+    	// Construct the list of possible states
+    	List<State> childrenStates= new ArrayList<State>();
+    	for (Move move : possibleMoves)
+    		childrenStates.add(new State(player.opponent(), new Board(board, move), move));
+    	
+    	// Set the children field
+    	setChildren(childrenStates.toArray(State.length0));
     }
 
     /** Write this State to a file called "output.txt", including its

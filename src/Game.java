@@ -8,7 +8,7 @@ public class Game {
     private GUI gui;
     private Board.Player winner;  // null
 
-    //Change this if you would like a delay between plays
+    // Change this if you would like a delay between plays
     private static final long SLEEP_INTERVAL= 0; //in milliseconds
 
     /** Have the computer play against itself, putting output int the default
@@ -24,14 +24,14 @@ public class Game {
          * see in the comments after these two assignments. In those assignments,
          * the second argument of the constructor is the depth to which AI
          * searches the game space. */
-        Solver p1= new Dummy(Board.Player.RED);
-        Solver p2= new Dummy(Board.Player.YELLOW); 
+        //Solver p1= new Dummy(Board.Player.RED);
+        //Solver p2= new Dummy(Board.Player.YELLOW); 
          
         //Solver p1= new AI(Board.Player.RED, 5);
         //Solver p2= new AI(Board.Player.YELLOW, 5);
         
-        Game game= new Game(p1, p2);
-        game.runGame();
+        //Game game= new Game(p1, p2);
+        //game.runGame();
         
         /* When testing, you may want to comment out all the above statements
          */
@@ -111,6 +111,23 @@ public class Game {
 
         /* ********* Put any testing methods that you write here.  *******
          * *** We will not see them because you don't submit class Game ***/
+    	
+    	/* Test Case 1*/
+    	/*Board b= new Board();
+    	fillColumn(b, Board.Player.RED, 1);
+    	fillColumn(b, Board.Player.RED, 2);
+    	Move[] moves= b.getPossibleMoves(Board.Player.RED);
+    	for (Move m : moves)
+    		System.out.println(m);*/
+        
+        /* Test Case 2*/
+        Board b= new Board();
+        fillColumn(b, Board.Player.RED, 0);
+    	fillColumn(b, Board.Player.YELLOW, 1);
+    	State state= new State(Board.Player.RED, b, null);
+    	AI.createGameTree(state, 3);
+    	AI.minimax(new AI(Board.Player.RED, 3), state);
+    	state.writeToFile();
     }
     
     /** Fill column c of board b, starting with player p.

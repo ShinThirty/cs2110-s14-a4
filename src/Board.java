@@ -96,8 +96,16 @@ public class Board {
      *  of columns that are not full. Thus, if all columns are full, return an
      *  array of length 0. */
     public Move[] getPossibleMoves(Player p) {
-        // TODO
-    	return null;
+        // If the game is over, return an array of length 0
+        if (hasConnectFour() != null)
+        	return Move.length0;
+        else {
+        	List<Move> possibleMoves= new ArrayList<Move>();
+        	for (int column= 0; column < NUM_COLS; column++)
+        		if (getTile(0, column) == null)
+        			possibleMoves.add(new Move(p, column));
+        	return possibleMoves.toArray(Move.length0);
+        }
     }
 
     /** Return a representation of this board */

@@ -18,8 +18,14 @@ public class AI implements Solver {
 
     /** See Solver.getMoves for the specification. */
     public @Override Move[] getMoves(Board b) {
-        // TODO
-    	return null;
+        // Set up current state
+    	State currentState= new State(player, b, null);
+    	
+    	// Construct the game tree
+    	createGameTree(currentState, depth);
+    	
+    	// Assign value to every tree node
+    	minimax(currentState);
     }
 
     /** Generate the game tree with root s of depth d.
@@ -30,10 +36,16 @@ public class AI implements Solver {
      * long time to run.
      * Note: If s has a winner (4 in a row), it should be a leaf. */
     public static void createGameTree(State s, int d) {
-        // Note: This method must be recursive, recursing on d,
-        // which should get smaller with each recursive call
-
-        // TODO
+        // Initialize the children field of State s
+    	s.initializeChildren();
+    	
+    	// If the children of s is an array of length 0 or d is less than or 
+    	// equal to 1, the recursion terminates.
+    	if ((s.getChildren() == State.length0) || d <= 1)
+    		return;
+    	else
+    		for (State childState : s.getChildren())
+    			createGameTree(childState, d - 1);
     }
     
     /** Call minimax in ai with state s. */
@@ -45,7 +57,15 @@ public class AI implements Solver {
      * Use the Minimax algorithm to assign a numerical value to each State of the
      * tree rooted at s, indicating how desirable that State is to this player. */
     public void minimax(State s) {
-        // TODO
+    	// Evaluate State s
+    	s.setValue(evaluateBoard(s.getBoard()));
+    	
+        // If the children of s is an array of length 0, the recursion terminates.
+    	if (s.getChildren() == State.length0)
+    		return;
+    	else
+    		for (State childState : s.getChildren())
+    			minimax(childState);
     }
 
     /** Evaluates the desirability of a given Board. This should only be
