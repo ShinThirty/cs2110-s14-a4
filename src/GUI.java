@@ -23,11 +23,11 @@ public class GUI extends JFrame implements ActionListener {
          * as parameters, with the a depth used to recurse when searching the
          * game space. */
         //Solver p1= new AI(Board.Player.RED, 6);
-        Solver p2= new Human(Board.Player.YELLOW);
-        //Solver p1= new Dummy(Board.Player.RED);
+        //Solver p2= new Human(Board.Player.YELLOW);
+        Solver p1= new Dummy(Board.Player.RED);
         //Solver p2= new Dummy(Board.Player.YELLOW);
-        Solver p1 = new Human(Board.Player.RED);
-        //Solver p2 = new Dummy(Board.Player.YELLOW);
+        //Solver p1 = new Human(Board.Player.RED);
+        Solver p2 = new Dummy(Board.Player.YELLOW);
 
         /* --------------------------------- Do not change below here. --------------------------------- */
 

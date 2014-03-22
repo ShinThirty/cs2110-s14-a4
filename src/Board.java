@@ -71,7 +71,20 @@ public class Board {
      *  player into move's column on this Board. Throw an
      *  IllegalArgumentException if move's column is full on this Board. */
     public void makeMove(Move move) {
-        // TODO
+    	// "player" is playing in this "column"
+        Player player= move.getPlayer();
+        int column= move.getColumn();
+        int row= NUM_ROWS - 1;
+        
+        // Find the possible tile and place the player or throw the Exception
+        while (row >= 0) {
+        	if (getTile(row, column) == null) break;
+        	row--;
+        }
+        if (row < 0)
+        	throw new IllegalArgumentException("Column " + column + " is already full.");
+        else
+        	board[row][column]= player;
     }
 
     /** Return an array of all moves that can possibly be made by Player p on this
