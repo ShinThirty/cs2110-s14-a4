@@ -18,14 +18,24 @@ public class AI implements Solver {
 
     /** See Solver.getMoves for the specification. */
     public @Override Move[] getMoves(Board b) {
+    	assert b != null;
+    	
         // Set up current state
     	State currentState= new State(player, b, null);
     	
     	// Construct the game tree
     	createGameTree(currentState, depth);
     	
-    	// Assign value to every tree node
+    	// Assign a value to every tree node
     	minimax(currentState);
+    	
+    	// Select the child states sharing same value of s and 
+    	// construct the output Move[].
+    	List<Move> preferredMoves= new ArrayList<Move>();
+    	for (State childState : currentState.getChildren())
+    		if (childState.getValue() == currentState.getValue())
+    			preferredMoves.add(childState.getLastMove());
+    	return preferredMoves.toArray(Move.length0);
     }
 
     /** Generate the game tree with root s of depth d.
@@ -57,15 +67,29 @@ public class AI implements Solver {
      * Use the Minimax algorithm to assign a numerical value to each State of the
      * tree rooted at s, indicating how desirable that State is to this player. */
     public void minimax(State s) {
-    	// Evaluate State s
-    	s.setValue(evaluateBoard(s.getBoard()));
-    	
-        // If the children of s is an array of length 0, the recursion terminates.
+    	// If s is a leaf node of the game tree, call the evaluateBoard() function.
     	if (s.getChildren() == State.length0)
-    		return;
-    	else
-    		for (State childState : s.getChildren())
+    		s.setValue(evaluateBoard(s.getBoard()));
+    	else if (s.getPlayer() == player) {
+    		// Choose the maximum value of the children as the value of s
+    		int maxValue= Integer.MIN_VALUE;
+    		for (State childState : s.getChildren()) {
     			minimax(childState);
+    			if (childState.getValue() > maxValue)
+    				maxValue= childState.getValue();
+    		}
+    		s.setValue(maxValue);
+    	}
+    	else {
+    		// Choose the minimum value of the children as the value of s
+    		int minValue= Integer.MAX_VALUE;
+    		for (State childState : s.getChildren()) {
+    			minimax(childState);
+    			if (childState.getValue() < minValue)
+    				minValue= childState.getValue();
+    		}
+    		s.setValue(minValue);
+    	}
     }
 
     /** Evaluates the desirability of a given Board. This should only be

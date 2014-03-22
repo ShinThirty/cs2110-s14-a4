@@ -27,11 +27,11 @@ public class Game {
         //Solver p1= new Dummy(Board.Player.RED);
         //Solver p2= new Dummy(Board.Player.YELLOW); 
          
-        //Solver p1= new AI(Board.Player.RED, 5);
-        //Solver p2= new AI(Board.Player.YELLOW, 5);
+        Solver p1= new AI(Board.Player.RED, 5);
+        Solver p2= new AI(Board.Player.YELLOW, 5);
         
-        //Game game= new Game(p1, p2);
-        //game.runGame();
+        Game game= new Game(p1, p2);
+        game.runGame();
         
         /* When testing, you may want to comment out all the above statements
          */
@@ -121,13 +121,13 @@ public class Game {
     		System.out.println(m);*/
         
         /* Test Case 2*/
-        Board b= new Board();
+        /*Board b= new Board();
         fillColumn(b, Board.Player.RED, 0);
     	fillColumn(b, Board.Player.YELLOW, 1);
     	State state= new State(Board.Player.RED, b, null);
     	AI.createGameTree(state, 3);
     	AI.minimax(new AI(Board.Player.RED, 3), state);
-    	state.writeToFile();
+    	state.writeToFile();*/
     }
     
     /** Fill column c of board b, starting with player p.
