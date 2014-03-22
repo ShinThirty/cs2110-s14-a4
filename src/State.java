@@ -16,7 +16,7 @@ public class State implements Comparable<Object> {
 
     /** All possible game States that can result from the next player's Move.
      *  The length of the array equals the number of States.
-     *  It is an array of length 0 if there are no possible moves
+     *  It is an array of length 0 if there are no possible moves.
      *  (once it has been set; initially, it is an array of length0) */
     private State[] children= length0;
 
